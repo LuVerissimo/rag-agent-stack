@@ -1,0 +1,43 @@
+name: Eval gate
+
+on:
+    pull_request:
+        branches: [main]
+
+env:
+    FAITHFULNESS_THRESHOLD: '0.75'
+    RELEVANCE_THRESHOLD: '0.70'
+
+jobs:
+    eval:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: '3.11'
+
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Start Chroma
+              run: docker compose up chroma -d
+
+            - name: Wait for Chroma to be ready
+              run: |
+                  for i in {1..10}; do
+                    curl -s http://localhost:8001/api/v1/heartbeat && break
+                    sleep 3
+                  done
+
+            - name: Run evals
+              env:
+                  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+                  LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+                  LANGCHAIN_TRACING_V2: 'false'
+                  FAITHFULNESS_THRESHOLD: ${{ env.FAITHFULNESS_THRESHOLD }}
+                  RELEVANCE_THRESHOLD: ${{ env.RELEVANCE_THRESHOLD }}
+              run: pytest evals/ -v
