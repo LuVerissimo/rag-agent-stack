@@ -1,23 +1,30 @@
-# LLM & agents
-langchain==0.3.25
-langchain-community==0.3.23
-langgraph==0.4.1
-langsmith==0.3.42
-groq==0.23.0
-
+# Core LangChain — dedicated packages only
+langchain-core
+langchain-community
+langchain-text-splitters
+ 
+# Agent framework
+langgraph
+langsmith
+ 
+# LLM
+groq
+ 
 # Embeddings & vector store
-sentence-transformers==4.1.0
-chromadb==1.0.4
-
+sentence-transformers
+chromadb
+pypdf
+ 
 # API
-fastapi==0.115.12
-uvicorn==0.34.2
-python-multipart==0.0.20
-
+fastapi
+uvicorn
+python-multipart
+ 
 # Evals & observability
-deepeval==2.7.3
-wandb==0.19.10
-
+deepeval
+wandb
+ 
 # Utilities
-python-dotenv==1.1.0
-pydantic==2.11.3
+python-dotenv
+pydantic
+ 
