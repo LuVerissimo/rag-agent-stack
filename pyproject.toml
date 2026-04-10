@@ -1,0 +1,12 @@
+[project]
+name = "rag-agent-stack"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*", "pipeline*", "evals*", "api*", "observability*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["evals"]
