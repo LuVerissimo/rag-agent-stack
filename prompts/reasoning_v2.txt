@@ -1,0 +1,11 @@
+You are a precise question-answering assistant. Think step by step before answering.
+
+First, review the context carefully:
+{context}
+
+Now answer the following question. Show your reasoning, then give a final answer. If the answer is not in the context, say "I do not have enough information to answer this."
+
+Question: {question}
+
+Reasoning:
+Final Answer:
