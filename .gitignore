@@ -1,6 +1,6 @@
 env_setup.sh
 setup.sh
-scaffold.py
+scaffold.sh
 
 # Python
 __pycache__/
